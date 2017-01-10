@@ -1,10 +1,16 @@
 Example code for running TIKA on Apache Spark.  The application will convert PDF's to a text stream and place the content in a "save" directory found in resources.  Please note the directory your Spark application is downloaded to.
 
+This code is a variation of a project recently completed.  It follows from :
+
+     https://github.com/scotthaleen/spark-hdfs-tika/blob/master/src/main/scala/Driver.scala
+
+This repo has stripped out customer customizations from the client application and is for demonstration purposes only.
+
+
 open a terminal then:
 
 1. $git clone https://github.com/marilynwaldman/sparkOcr
 
-   
 
 2. change directories to the application
 

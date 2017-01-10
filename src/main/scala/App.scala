@@ -16,6 +16,7 @@ import scala.util.Try
 
 import org.apache.hadoop.conf.Configuration
 import org.apache.hadoop.fs.{Path, FileSystem}
+
 /**
  *Demo project for running OCR on pdf files with Apache Spark.  
  * 
@@ -56,6 +57,7 @@ object App {
     p.parse(is, handler, new Metadata(), new ParseContext())
     (ext, handler.toString,  false)
   }
+
 /**
  * extractinfo - TRY - can catch exception from TIKO
  * 
@@ -65,6 +67,7 @@ object App {
  *        - content - generated text from OCR
  *        - is an exception or not (true or false)
  */
+
   def extractinfo(filePath: String): Try[(String, String, Boolean)] = Try(extractInfo(filePath))
 
  /**
@@ -76,6 +79,7 @@ object App {
  *        - content - generated text from OCR
  *        - is an exception or not (true or false)
  */
+
   def extract(filePath: String) : (String, String, String) = {
     val (fileext, content, has_exception) = extractinfo(filePath).getOrElse(("", "", true  ))
     (fileext.toString, content, has_exception.toString)
