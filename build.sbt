@@ -8,6 +8,7 @@ scalaVersion := "2.11.7"
 
 
 libraryDependencies ++= Seq(
+  "junit" % "junit" % "4.10" % "test",
   "org.scalatest" %% "scalatest" % "2.2.6" % "test",
   "org.scalacheck" %% "scalacheck" % "1.11.5" % "test",
   "org.apache.spark" %% "spark-core" % "1.6.1",
