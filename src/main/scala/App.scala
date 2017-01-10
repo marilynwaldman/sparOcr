@@ -57,7 +57,7 @@ object App {
     (ext, handler.toString,  false)
   }
 /**
- * extractinfo - TRY - can catch exception 
+ * extractinfo - TRY - can catch exception from TIKO
  * 
  * param filePath:  full path file name ie ./src/main/resources/SeagateEngineer.pdf
  * return 3 tuple (String, String, String)
@@ -85,7 +85,7 @@ object App {
  * Main entry 
  * 
  * param args:  Not used
- * return textfiles (pdf's converted to text)
+ * return textfiles (pdf's converted to text) in Resources/save as HDFS files.
  */
 
   def main(args: Array[String]) {
