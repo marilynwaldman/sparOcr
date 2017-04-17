@@ -1,4 +1,4 @@
-package com.example.simplesbt
+package com.sparkOcr
 
 //Spark Libraries
 
