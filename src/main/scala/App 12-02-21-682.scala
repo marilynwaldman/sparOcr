@@ -4,7 +4,7 @@ package com.sparkOcr
 
 import org.apache.spark.SparkContext
 import org.apache.spark.SparkConf
-import java.io.{File, FileInputStream, InputStream, StringWriter}
+import java.io.{File, FileInputStream, InputStream, StringWriter, FileWriter, BufferedWriter, PrintWriter}
 
 //Tika Libraries
 
@@ -80,9 +80,9 @@ object App {
  *        - is an exception or not (true or false)
  */
 
-  def extract(filePath: String) : (String, String, String) = {
+  def extract(filePath: String) : (String, String, String, String) = {
     val (fileext, content, has_exception) = extractinfo(filePath).getOrElse(("", "", true  ))
-    (fileext.toString, content, has_exception.toString)
+    (fileext.toString, content, has_exception.toString, filePath)
   }
   
   /**
@@ -101,11 +101,32 @@ object App {
     
 //  Read list of pdf's
     
-    val distData = sc.textFile("./src/main/resources/pdfs.txt")
+    val file1 = "./src/main/resources/pdfs.txt"
+    val distData = sc.textFile("./src/main/resources/DianeJan26EmailPdf.txt")
+    val outDir = "./src/main/resources/outdir/"
+//    val outDir = "/Users/marilynwaldman/Mail//Junk/DJan26NewTxt"
+
+    var num = file1.split("/").last;
+    
+    println(num)
     
  // Run ocr (TIKA) on each file and save to HDFS
     
-    distData.map( line => extract(line.trim)).map(x => x._2).saveAsTextFile("./src/main/resources/save")
+    distData.map( line => extract(line.trim)).map(x => (x._2,x._4)).saveAsTextFile("./src/main/resources/save")
+    var s  = distData.map( line => extract(line.trim)).map(x => (x._2,x._4 )).collect()
+    var x = for ( f <- s) yield (f._1, outDir + (f._2).substring((f._2).lastIndexOf("/") + 1) +".txt")
+    
+    //x.foreach(println)
+    
+    for (f <- x) {
+         println(f._2)
+         val pw = new PrintWriter(new File(f._2))
+	 pw.write(f._1)
+   	 pw.close
+    }
+         
+     
+    
 
 
   }
